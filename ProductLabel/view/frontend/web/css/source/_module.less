@@ -1,0 +1,74 @@
+& when (@media-common = true) {
+    .product-image-wrapper {
+        .top-left {
+            left: 0;
+            max-width: 25%;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+        }
+
+        .top-right {
+            max-width: 25%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        .lower-left {
+            bottom: 0;
+            left: 0;
+            max-width: 25%;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .lower-right {
+            bottom: 0;
+            max-width: 25%;
+            position: absolute;
+            right: 0;
+            z-index: 2;
+        }
+    }
+
+    .product {
+        &.media {
+
+            position: relative;
+
+            .top-left {
+                left: 0;
+                max-width: 10%;
+                position: absolute;
+                top: 0;
+                z-index: 2;
+            }
+
+            .top-right {
+                max-width: 10%;
+                position: absolute;
+                right: 0;
+                top: 0;
+                z-index: 2;
+            }
+
+            .lower-left {
+                bottom: 110px;
+                left: 0;
+                max-width: 10%;
+                position: absolute;
+                z-index: 2;
+            }
+
+            .lower-right {
+                bottom: 110px;
+                max-width: 10%;
+                position: absolute;
+                right: 0;
+                z-index: 2;
+            }
+        }
+    }
+}

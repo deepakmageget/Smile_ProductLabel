@@ -1,0 +1,59 @@
+<?php
+/**
+ * Product label visual template
+ *
+ * @var $block \Smile\ProductLabel\Block\ProductLabel\ProductLabel
+ * @var $escaper Magento\Framework\Escaper
+ */
+?>
+
+<?php $productLabels = $block->getProductLabelsList(); ?>
+
+<?php 
+
+$getCurrentProduct = $block->getCurrentProduct();
+
+$getCurrentCategory = $block->getCurrentCategory();
+
+$getCategoryIds = $getCurrentProduct->getCategoryIds();
+$getCurrentProductId = $getCurrentProduct->getId(); //52
+
+$attributes = $getCurrentProduct->getAttributes();
+
+// $option = array();
+// foreach($attributes as $value)
+//             {
+// 		  $option = $value->getData();
+// 	    }
+        
+//         $productCollection = $block->getProductCollection($getCurrentProductId);
+//         foreach ($productCollection as $product) {
+//             // print_r($product->getData());     // [color] => 49
+//             // echo "<br>";
+//         }
+        
+?>
+
+<?php if ($productLabels): ?>
+  <?php foreach($productLabels as $productlabel): ?>
+
+    <?php  
+    //  echo "<pre>";
+    //  print_r($productlabel['category_id']);
+
+         $productlabelcat=$productlabel['category_id'];
+         $display_on=$productlabel['display_on'];
+        //  if(!empty($display_on) && in_array(0,$display_on) || array_intersect($productlabelcat,$getCategoryIds)):// enbale when category lable image show here
+
+            if(!empty($display_on) && in_array(0,$display_on)):
+           
+           
+        ?>
+
+        <div class="<?= $escaper->escapeHtml($productlabel['position_product_view']); ?>">
+        <img src="<?= $escaper->escapeUrl($block->getImageUrl($productlabel['image'])); ?>"/>
+        </div>
+        <?php endif; ?>
+        <?php endforeach ;?>
+<?php endif; ?>
+

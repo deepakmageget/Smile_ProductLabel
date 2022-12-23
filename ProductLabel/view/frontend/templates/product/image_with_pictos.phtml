@@ -1,0 +1,91 @@
+<?php
+/**
+ * Product image able to also display product labels / pictos
+ *
+ * @var $block \Magento\Catalog\Block\Product\Image
+ * @var $escaper Magento\Framework\Escaper
+ */
+?>
+
+
+<?php $productLabels = $block->getProductLabelsList(); ?>
+<?php $getCurrentCategory = $block->getCurrentCategory(); ?>
+
+<?php 
+
+// echo "<pre>";
+// print_r($productLabels);
+// die("mageget");
+
+?>
+
+<span class="product-image-container"
+      style="width:<?= $escaper->escapeHtml($block->getWidth()) ?>px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: <?= /* @escapeNotVerified */ $block->getRatio() * 100 ?>%;">
+
+
+          <?php 
+if(null !== $getCurrentCategory){
+
+    $getCurrentCategoryId = $getCurrentCategory->getId();
+foreach($productLabels as $productlabel):
+
+    $productlabelcat=$productlabel['category_id'];
+    $display_on=$productlabel['display_on'];
+
+    if(in_array($getCurrentCategoryId,$productlabelcat) || in_array(1,$productlabelcat)){
+        // echo $productlabel['image'];
+        if(in_array(1,$display_on)){
+        ?>
+        <?php if ($productlabel): ?>
+          
+                <div class="<?= $escaper->escapeHtml($productlabel['position_product_view']); ?>">
+
+                <img src="<?= $block->getUrl().'media/smile_productlabel/imagelabel/'.$productlabel['image']; ?>"/>
+             
+                </div>
+        <?php endif; ?>
+
+        <?php
+    } 
+}
+
+endforeach ;  
+
+}
+
+?>
+
+
+        <img class="product-image-photo"
+            <?= $escaper->escapeHtmlAttr($block->getCustomAttributes()) ?>
+            src="<?= $escaper->escapeUrl($block->getImageUrl()) ?>"
+             max-width="<?= $escaper->escapeHtml($block->getWidth()) ?>"
+             max-height="<?= $escaper->escapeHtml($block->getHeight()) ?>"
+             alt="<?= $escaper->escapeHtml(
+                 $block->stripTags($block->getLabel(), null, true)
+             ) ?>"/>
+    </span>
+</span>
+
+
+<!-- Array
+(
+    [product_label_id] => 2
+    [is_active] => 1
+    [name] => test label
+    [attribute_id] => 99
+    [option_id] => 2
+    [image] => mage-get-logo.png
+    [position_category_list] => top-right
+    [position_product_view] => top-right
+    [alt] => test label 1
+    [display_on] => Array
+        (
+            [0] => 1
+            [1] => 2
+        )
+
+)
+mageget -->
